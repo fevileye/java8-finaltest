@@ -46,4 +46,19 @@ public class mainAppTest {
 		
 		assertEquals(mainApp.dataTotal(EmployeeName),2);
 	}
+	
+	@Test
+	public void filterName() throws Exception{
+		List<String> EmployeeName=new ArrayList<String>();
+		EmployeeName.add("Budi");
+		EmployeeName.add("Santi");
+		
+		List<String> EmployeeNameFilter=new ArrayList<String>();
+		EmployeeNameFilter.add("Santi");
+		
+		assertEquals(mainApp.filterName(EmployeeName, "ti"),EmployeeNameFilter);	
+		
+		
+		
+	}
 }

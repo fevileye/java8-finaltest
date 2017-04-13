@@ -68,13 +68,7 @@ public class mainApp {
 	
 	public static List<String> delete(List<String> EmployeeName,String cari){
 		
-		for (int i=0;i<EmployeeName.size();i++)
-		{
-			if (EmployeeName.get(i).compareTo(cari)==0)
-			{
-				EmployeeName.remove(i);
-			}
-		}
+		EmployeeName.removeIf(e->e.equals(cari));
 		
 		return EmployeeName;
 	}
@@ -93,6 +87,12 @@ public class mainApp {
 		return EmployeeName.stream().count();
 	}
 
+	public static List<String> filterName(List<String> EmployeeName, String Value){
+		EmployeeName.stream().filter(e->e.contains(Value)).forEach(System.out::println);
+		EmployeeName=EmployeeName.stream().filter(e->e.contains(Value)).collect(Collectors.toList());
+		return EmployeeName;
+	}
+	
 	public static void main(String[] args) {
 		Scanner sc= new Scanner(System.in);
 		int choice=0;
@@ -110,7 +110,8 @@ public class mainApp {
 		System.out.println("2. Delete Employee Data");
 		System.out.println("3. List Employee Data");
 		System.out.println("4. Show numbers of employee");
-		System.out.println("5. Exit");
+		System.out.println("5. Sort Employee Data based on Input");
+		System.out.println("6. Exit");
 		System.out.println("Your choice : ");
 		choice=sc.nextInt();
 		
@@ -134,12 +135,17 @@ public class mainApp {
 				System.out.println(dataTotal(EmployeeName));
 				break;
 			case 5:
+				System.out.println("Name that contains what word? ");
+				tempName=sc.next();
+				filterName(EmployeeName, tempName);
+				break;
+			case 6:
 				close(EmployeeName);
 				break;
 			}
 			
 		}
-		while(choice!=5);
+		while(choice!=6);
 		
 	}
 }
